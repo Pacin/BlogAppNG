@@ -1,0 +1,37 @@
+<div class="row justify-content-md-center mt-5">
+ <div class="col col-lg-4">
+    <div class="card shadow">
+        <div class="card-body">
+            <form (submit)="register()">
+                <div class="mb-3">
+                    <label for="usernameInput" class="form-label">Username</label>
+                    <input [(ngModel)]="registerForm.username" name="username" type="text" class="form-control" id="usernameInput">
+                  </div>
+                <div class="mb-3">
+                  <label for="emailInput" class="form-label">Email address</label>
+                  <input [(ngModel)]="registerForm.email" name="email" type="email" class="form-control" id="emailInput">
+                </div>
+                <div class="mb-3">
+                  <label for="passwordInput" class="form-label">Password</label>
+                  <input [(ngModel)]="registerForm.password" name="password" type="password" class="form-control" id="passwordInput">
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPasswordInput" class="form-label">Confirm Password</label>
+                    <input [(ngModel)]="registerForm.confirmPassword" name="confirm-password" type="password" class="form-control" id="confirmPasswordInput">
+                  </div>
+                <div class="mb-3 form-check">
+                  <input [(ngModel)]="isToSChecked" name="terms-of-service" type="checkbox" class="form-check-input" id="terms-of-service">
+                  <label class="form-check-label" for="terms-of-servicec">I agree with the <a href="#" target="_blank">Terms of Service</a>.</label>
+                </div>
+                <button 
+                    type="submit" 
+                    class="btn btn-primary"
+                    [disabled]="isSubmitting"
+                    [ngClass]="{disabled: isSubmitting}">
+                    Register
+                </button>
+              </form>
+            </div>
+    </div>
+ </div>
+</div>
