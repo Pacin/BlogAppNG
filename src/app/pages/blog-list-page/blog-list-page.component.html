@@ -1,1 +1,35 @@
-<p>blog-list-page works!</p>
+<div class="row justify-content-center mt-5" *ngIf="isAuthenticated">
+    <div class=" col-3">
+        <a  
+            routerLink="/create-post"
+            class="btn btn-primary d-block shadow">Create New Post</a>
+    </div>
+</div>
+
+<div class="row mt-5 g-5">
+
+    <div class="col-4" *ngFor="let post of posts">
+
+        <div class="card shadow">
+
+            <div class="card-body">
+                <h6 class="text-end m-0">{{post.user.username}}</h6>
+                <h6 class="text-muted text-end">{{post.user.email}}</h6>
+
+                <h3 class="display-6 mb-3">{{post.title}}</h3>
+
+                <p>{{post.body.substring(0,250)}}...</p>
+
+                <a 
+                    [routerLink]="'/blogs/'+ post.id"
+                     class="btn btn-primary shadow">
+                     Read More
+                </a>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

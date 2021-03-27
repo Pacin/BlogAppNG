@@ -10,6 +10,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CreateBlogPageComponent } from './pages/create-blog-page/create-blog-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     BlogListPageComponent,
     BlogDetailPageComponent,
     RegisterPageComponent,
-    LoginPageComponent    
+    LoginPageComponent,
+    CreateBlogPageComponent    
   ],
   
   imports: [

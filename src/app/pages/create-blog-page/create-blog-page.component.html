@@ -1,0 +1,40 @@
+<div class="row justify-content-center mt-5">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body shadow">
+                <form (submit)="createPost()">
+                    <div class="mb-3">
+                        <label for="postTitleInput" class="form-label">Post Title</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="postTitleInput" 
+                            placeholder="Enter a Title..."
+                            [(ngModel)]="blogForm.title"
+                            name="postTitleInput"
+                            >
+                    </div>
+                    <div class="mb-3">
+                        <label for="postBodyInput" class="form-label">Post Body</label>
+                        <textarea
+                            class="form-control" 
+                            id="postBodyInput" 
+                            rows="8" 
+                            placeholder="Dear diary, ..."
+                            [(ngModel)]="blogForm.body"
+                            name="postBodyInput">
+                        </textarea>
+                    </div>
+
+                    <button
+                        class="btn btn-primary shadow"
+                        type="submit"
+                        [ngClass]="{disabled: isSubmitting}"
+                        [disabled]="isSubmitting">
+                        Submit Post
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
