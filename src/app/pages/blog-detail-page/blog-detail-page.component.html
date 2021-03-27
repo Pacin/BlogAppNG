@@ -10,9 +10,50 @@
             <p>
                 {{post.body}}
             </p>
-            <div class="actions" *ngIf="isAuthenticated">
-                <button (click)="deletePost(post.id)" class="btn btn-danger me-1 shadow">Delete</button>
-                <button class="btn btn-warning shadow">Edit</button>
+            <div class="actions mb-2 mt-3" *ngIf="isAuthenticated">
+                <button 
+                    (click)="deletePost(post.id)" 
+                    class="btn btn-danger me-1 shadow">
+                    Delete
+                </button>
+                <button 
+                    (click)="editHandler($event)" 
+                    class="btn btn-warning shadow">
+                    Edit
+                </button>
             </div>
+
+            <div class="card mt-3 mb-2" *ngIf="isVisible">
+                <div class="card-body">
+            <div class="edit-wrapper mb-1 mt-3" >
+                <div class="mb-3">
+                    <label for="editPostTitleInput" class="form-label">Post Title</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="editPostTitleInput" 
+                        placeholder="Enter a Title..."
+                        [(ngModel)]="post.title"
+                        name="editPostTitleInput">
+                </div>
+                <div class="mb-3">
+                    <label for="editPostBodyInput" class="form-label">Post Body</label>
+                    <textarea
+                        class="form-control" 
+                        id="editPostBodyInput" 
+                        rows="12" 
+                        placeholder="Dear diary, ..."
+                        [(ngModel)]="post.body"
+                        name="editPostBodyInput">
+                    </textarea>
+                </div>
+                <button
+                    (click)="editPost(post.id)" 
+                    class="btn btn-primary shadow">
+                    Save
+                </button>
+            </div>
+         </div>
         </div>
     </div>
+</div>

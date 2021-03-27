@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class BlogDetailPageComponent implements OnInit {
   post = null;
+  isVisible:boolean = false;
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,11 +33,28 @@ export class BlogDetailPageComponent implements OnInit {
   }
 
   deletePost(postId) {
+    if(this.authService.user.username !== this.post.user.username) return window.alert('You dont have the perm to do it.');
+
     this.http.delete(`http://localhost:1337/posts/${postId}`, {
       headers: {
         Authorization: `Bearer ${this.authService.jwt}`
       }
     })
       .subscribe(() => this.router.navigateByUrl('/blogs'))
+}
+
+  editHandler() {
+    this.isVisible = !this.isVisible;
+  }
+
+  editPost(postId) {
+    if(this.authService.user.username !== this.post.user.username) return window.alert('You dont have the perm to do it.');
+
+      this.http.put(`http://localhost:1337/posts/${postId}`, {...this.post}, {
+        headers: {
+          Authorization: `Bearer ${this.authService.jwt}`
+        }
+      })
+        .subscribe(() => this.router.navigateByUrl('/blogs'))
   }
 }
