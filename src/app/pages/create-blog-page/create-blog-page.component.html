@@ -21,6 +21,9 @@
                                 <div class="invalid-feedback" *ngIf="blogTitle.errors.minlength">
                                   Post title must be minimum 3 characters!
                                 </div>
+                                <div class="invalid-feedback" *ngIf="blogTitle.errors.forbiddenWords">
+                                    Has a forbidden word!
+                                </div>
                               </ng-container>
                     </div>
                     <div class="mb-3">
@@ -44,6 +47,9 @@
                             </div>
                             <div class="invalid-feedback" *ngIf="blogBody.errors.minThreeWords">
                                 Post body must contains at least 3 words.
+                            </div>
+                            <div class="invalid-feedback" *ngIf="blogBody.errors.forbiddenWords">
+                                Has a forbidden word!
                             </div>
                           </ng-container>
                     </div>

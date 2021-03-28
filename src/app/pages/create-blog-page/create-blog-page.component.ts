@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { minThreeWords } from 'src/app/shared/customValidators';
+import { minThreeWords, forbiddenWords } from 'src/app/shared/customValidators';
 
 @Component({
   selector: 'app-create-blog-page',
@@ -13,12 +13,14 @@ import { minThreeWords } from 'src/app/shared/customValidators';
 export class CreateBlogPageComponent implements OnInit {
   blogTitle = new FormControl('', [
     Validators.required,
-    Validators.minLength(3)
+    Validators.minLength(3),
+    forbiddenWords(['hamburger', 'pizza'])
   ]);
   blogBody = new FormControl('', [
     Validators.required,
     Validators.minLength(5),
-    minThreeWords
+    minThreeWords,
+    forbiddenWords(['Bilgisayar', 'iphone'])
   ]);
 
 
