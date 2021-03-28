@@ -28,8 +28,8 @@ export class BlogDetailPageComponent implements OnInit {
     })
   }
 
-  get isAuthenticated() {
-    return !!this.authService.jwt;
+  get isMe() {
+    return this.authService.user.id === this.post.user.id;
   }
 
   deletePost(postId) {
@@ -50,7 +50,7 @@ export class BlogDetailPageComponent implements OnInit {
   editPost(postId) {
     if(this.authService.user.username !== this.post.user.username) return window.alert('You dont have the perm to do it.');
 
-      this.http.put(`http://localhost:1337/posts/${postId}`, {...this.post}, {
+      this.http.put(`http://localhost:1337/posts/${postId}`, this.post, {
         headers: {
           Authorization: `Bearer ${this.authService.jwt}`
         }

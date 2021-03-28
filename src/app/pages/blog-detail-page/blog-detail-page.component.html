@@ -10,7 +10,7 @@
             <p>
                 {{post.body}}
             </p>
-            <div class="actions mb-2 mt-3" *ngIf="isAuthenticated">
+            <div class="actions mb-2 mt-3" *ngIf="isMe">
                 <button 
                     (click)="deletePost(post.id)" 
                     class="btn btn-danger me-1 shadow">
