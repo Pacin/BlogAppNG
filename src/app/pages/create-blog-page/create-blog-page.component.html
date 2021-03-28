@@ -1,4 +1,4 @@
-<div class="row justify-content-center mt-5">
+<div class="row justify-content-center my-5">
     <div class="col-6">
         <div class="card">
             <div class="card-body shadow">
@@ -10,9 +10,18 @@
                             class="form-control" 
                             id="postTitleInput" 
                             placeholder="Enter a Title..."
-                            [(ngModel)]="blogForm.title"
-                            name="postTitleInput"
-                            >
+                            [formControl]="blogTitle"
+                            [ngClass]="{'is-invalid': blogTitle.invalid && (blogTitle.dirty || blogTitle.touched)}"
+                            name="postTitleInput">
+
+                            <ng-container *ngIf="blogTitle.invalid && (blogTitle.dirty || blogTitle.touched)">
+                                <div class="invalid-feedback" *ngIf="blogTitle.errors.required">
+                                 Post title is required!
+                                </div>
+                                <div class="invalid-feedback" *ngIf="blogTitle.errors.minlength">
+                                  Post title must be minimum 3 characters!
+                                </div>
+                              </ng-container>
                     </div>
                     <div class="mb-3">
                         <label for="postBodyInput" class="form-label">Post Body</label>
@@ -21,9 +30,19 @@
                             id="postBodyInput" 
                             rows="8" 
                             placeholder="Dear diary, ..."
-                            [(ngModel)]="blogForm.body"
+                            [formControl]="blogBody"
+                            [ngClass]="{'is-invalid': blogBody.invalid && (blogBody.dirty || blogBody.touched)}"
                             name="postBodyInput">
                         </textarea>
+
+                        <ng-container *ngIf="blogBody.invalid && (blogBody.dirty || blogBody.touched)">
+                            <div class="invalid-feedback" *ngIf="blogBody.errors.required">
+                                Post body is required!
+                            </div>
+                            <div class="invalid-feedback" *ngIf="blogBody.errors.minlength">
+                                Post body must be minimum 5 characters!
+                            </div>
+                          </ng-container>
                     </div>
 
                     <button

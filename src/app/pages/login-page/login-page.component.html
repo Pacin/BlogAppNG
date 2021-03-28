@@ -19,14 +19,14 @@
                         required
                         minlength="3">
 
-                          <ng-container *ngIf="identifier.invalid && (identifier.dirty || identifier.touched)">
-                            <div class="invalid-feedback" *ngIf="identifier.errors.required">
-                              Username or email address is required!
-                            </div>
-                            <div class="invalid-feedback" *ngIf="identifier.errors.minlength">
-                              Username or email address must be minimum 3 characters!
-                            </div>
-                          </ng-container>
+                        <ng-container *ngIf="identifier.invalid && (identifier.dirty || identifier.touched)">
+                          <div class="invalid-feedback" *ngIf="identifier.errors.required">
+                            Username or email address is required!
+                          </div>
+                          <div class="invalid-feedback" *ngIf="identifier.errors.minlength">
+                            Username or email address must be minimum 3 characters!
+                          </div>
+                        </ng-container>
                      </div>
 
 

@@ -8,7 +8,7 @@ import { BlogListPageComponent } from './pages/blog-list-page/blog-list-page.com
 import { BlogDetailPageComponent } from './pages/blog-detail-page/blog-detail-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateBlogPageComponent } from './pages/create-blog-page/create-blog-page.component';
 
@@ -27,6 +27,7 @@ import { CreateBlogPageComponent } from './pages/create-blog-page/create-blog-pa
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [],
