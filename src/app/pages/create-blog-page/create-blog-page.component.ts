@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { minThreeWords } from 'src/app/shared/customValidators';
 
 @Component({
   selector: 'app-create-blog-page',
@@ -16,7 +17,8 @@ export class CreateBlogPageComponent implements OnInit {
   ]);
   blogBody = new FormControl('', [
     Validators.required,
-    Validators.minLength(5)
+    Validators.minLength(5),
+    minThreeWords
   ]);
 
 

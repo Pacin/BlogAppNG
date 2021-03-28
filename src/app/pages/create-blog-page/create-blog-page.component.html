@@ -42,6 +42,9 @@
                             <div class="invalid-feedback" *ngIf="blogBody.errors.minlength">
                                 Post body must be minimum 5 characters!
                             </div>
+                            <div class="invalid-feedback" *ngIf="blogBody.errors.minThreeWords">
+                                Post body must contains at least 3 words.
+                            </div>
                           </ng-container>
                     </div>
 
