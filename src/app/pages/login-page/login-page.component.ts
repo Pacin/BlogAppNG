@@ -26,15 +26,15 @@ export class LoginPageComponent implements OnInit {
   login(){
     this.isSubmitting = true;
 
-  this.authService.login(this.loginForm)
-    .subscribe((data:any) => {
-      this.authService.setUser(data.user);
-      this.authService.setJwt(data.jwt, this.isRememberMe);
-      this.loginForm.identifier = '';
-      this.loginForm.password = '';
-      this.isSubmitting = false;
-      this.router.navigateByUrl('/');
-    })
+    this.authService.login(this.loginForm)
+      .subscribe((data:any) => {
+        this.authService.setUser(data.user);
+        this.authService.setJwt(data.jwt, this.isRememberMe);
+        this.loginForm.identifier = '';
+        this.loginForm.password = '';
+        this.isSubmitting = false;
+        this.router.navigateByUrl('/');
+      })
   }
 
 }

@@ -2,13 +2,34 @@
     <div class="col col-lg-4">
        <div class="card shadow">
            <div class="card-body">
-               <form (submit)="login()">
+               <form class="needs-validation" novalidate (submit)="!identifier.invalid && !password.invalid && login()">
+
                    <div class="mb-3">
                        <label for="identifierInput" class="form-label">
                            Email or Username
                         </label>
-                       <input [(ngModel)]="loginForm.identifier" name="identifier" type="text" class="form-control" id="identifierInput">
+                       <input 
+                        [(ngModel)]="loginForm.identifier" 
+                        name="identifier" 
+                        type="text" 
+                        #identifier="ngModel"
+                        class="form-control" 
+                        [ngClass]="{'is-invalid': identifier.invalid && (identifier.dirty || identifier.touched)}"
+                        id="identifierInput"
+                        required
+                        minlength="3">
+
+                          <ng-container *ngIf="identifier.invalid && (identifier.dirty || identifier.touched)">
+                            <div class="invalid-feedback" *ngIf="identifier.errors.required">
+                              Username or email address is required!
+                            </div>
+                            <div class="invalid-feedback" *ngIf="identifier.errors.minlength">
+                              Username or email address must be minimum 3 characters!
+                            </div>
+                          </ng-container>
                      </div>
+
+
                    <div class="mb-3">
                      <label for="passwordInput" class="form-label">
                          Password
@@ -16,9 +37,22 @@
                      <input 
                         [(ngModel)]="loginForm.password" 
                         name="password" 
+                        #password="ngModel"
                         type="password" 
                         class="form-control" 
-                        id="passwordInput">
+                        [ngClass]="{'is-invalid': password.invalid && (password.dirty || password.touched)}"
+                        id="passwordInput"
+                        required
+                        minlength="6">
+
+                        <ng-container *ngIf="password.invalid && (password.dirty || password.touched)">
+                        <div class="invalid-feedback" *ngIf="password.errors.required" >
+                          Invalid password!
+                        </div>
+                        <div class="invalid-feedback" *ngIf="password.errors.minlength" >
+                          Must be at least 6 characters!
+                        </div>
+                      </ng-container>
                    </div>
                    <div class="mb-3 form-check">
                      <input [(ngModel)]="isRememberMe" name="rememberMe" type="checkbox" class="form-check-input" id="rememberMe">
