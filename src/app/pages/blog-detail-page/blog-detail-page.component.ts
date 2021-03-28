@@ -11,6 +11,9 @@ import { AuthService } from 'src/app/services/auth.service';
 export class BlogDetailPageComponent implements OnInit {
   post = null;
   isVisible:boolean = false;
+  comments:any[] = [];
+  commentText:string;
+  isSubmittingComment:boolean = false;
 
 
   constructor(
@@ -23,17 +26,30 @@ export class BlogDetailPageComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       const id = params.id;
+
       this.http.get(`http://localhost:1337/posts/${id}`)
-        .subscribe(data => this.post = data);
-    })
+        .subscribe((data:any) => this.post = data);
+      this.fetchComments(id);
+      })
   }
 
   get isMe() {
-    return this.authService.user.id === this.post.user.id;
+    if(this.authService.user) {
+      return this.authService.user.id === this.post.user.id;
+    }
+  }
+
+  get isAuthenticated(){
+    return !!this.authService.jwt;
+  }
+
+  fetchComments(postId:number) {
+    this.http.get(`http://localhost:1337/comments?post=${postId}`)
+    .subscribe((data:any) => this.comments = data) 
   }
 
   deletePost(postId) {
-    if(this.authService.user.username !== this.post.user.username) return window.alert('You dont have the perm to do it.');
+    if(this.authService.user.id !== this.post.user.id) return window.alert('You dont have the perm to do it.');
 
     this.http.delete(`http://localhost:1337/posts/${postId}`, {
       headers: {
@@ -48,7 +64,7 @@ export class BlogDetailPageComponent implements OnInit {
   }
 
   editPost(postId) {
-    if(this.authService.user.username !== this.post.user.username) return window.alert('You dont have the perm to do it.');
+    if(this.authService.user.id !== this.post.user.id) return window.alert('You dont have the perm to do it.');
 
       this.http.put(`http://localhost:1337/posts/${postId}`, this.post, {
         headers: {
@@ -56,5 +72,35 @@ export class BlogDetailPageComponent implements OnInit {
         }
       })
         .subscribe(() => this.router.navigateByUrl('/blogs'))
+  }
+
+  createComment() {
+    this.isSubmittingComment = true;
+
+    
+
+  const newComment = {
+    text: this.commentText,
+    post: this.post.id,
+    user: this.authService.user.id
+  }
+
+    this.http.post(`http://localhost:1337/comments`, newComment, {
+      headers: {
+        Authorization:`Bearer ${this.authService.jwt}`
+      }
+    }) .subscribe(data => {
+      this.commentText = '';
+      this.isSubmittingComment = false;
+      this.fetchComments(this.post.id);
+    })
+  }
+
+  deleteComment(commentId:number) {
+this.http.delete(`http://localhost:1337/comments/${commentId}`, {
+   headers:{
+     Authorization: `Bearer ${this.authService.jwt}`
+   }
+}).subscribe(data => this.fetchComments(this.post.id));
   }
 }
